@@ -1,0 +1,8 @@
+# Copy target from Local => Docker VM
+> docker-machine scp -r $srcdir test:/tmp/$destdir
+
+# Get container ID
+> docker-machine ssh test docker ps
+
+# Copy target from Docker VM => Docker Container
+> docker-machine ssh test docker cp /tmp/$srcdir $container_id:/tmp/$destdir
