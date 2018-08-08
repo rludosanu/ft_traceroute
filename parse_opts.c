@@ -12,6 +12,16 @@
 
 #include "ft_traceroute.h"
 
+static int strisnumber(const char *str)
+{
+  if (!str || !strlen(str))
+    return (0);
+  while (*str != '\0')
+    if (!isdigit(*str++))
+      return (0);
+  return (1);
+}
+
 int			parse_opts(s_opts *opts, int argc, char **argv)
 {
 	int		i;
@@ -24,9 +34,9 @@ int			parse_opts(s_opts *opts, int argc, char **argv)
 	{
 		p = argv[i];
 		// Start hop
-		if (ft_strequ(p, "-f"))
+		if (!strcmp(p, "-f"))
 		{
-			if (ft_isnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
+			if (strisnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
 			{
 				if ((opts->opt_ttlst = atoi(argv[i++ + 1])) > opts->opt_ttl)
 					return (infousage(ERR_TTL));
@@ -35,9 +45,9 @@ int			parse_opts(s_opts *opts, int argc, char **argv)
 				return (infousage(ERR_INVARG));
 		}
 		// Max hops
-		else if (ft_strequ(p, "-m"))
+		else if (!strcmp(p, "-m"))
 		{
-			if (ft_isnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
+			if (strisnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
 			{
 				if ((opts->opt_ttl = atoi(argv[i++ + 1])) < opts->opt_ttlst)
 					return (infousage(ERR_TTL));
@@ -46,25 +56,25 @@ int			parse_opts(s_opts *opts, int argc, char **argv)
 				return (infousage(ERR_INVARG));
 		}
 		// Wait time
-		else if (ft_strequ(p, "-w"))
+		else if (!strcmp(p, "-w"))
 		{
-			if (ft_isnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
+			if (strisnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
 				opts->opt_timeout = atoi(argv[i++ + 1]);
 			else
 				return (infousage(ERR_INVARG));
 		}
 		// Probes count
-		else if (ft_strequ(p, "-q"))
+		else if (!strcmp(p, "-q"))
 		{
-			if (ft_isnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
+			if (strisnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
 				opts->opt_probes = atoi(argv[i++ + 1]);
 			else
 				return (infousage(ERR_INVARG));
 		}
 		// Port (used only for UDP)
-		else if (ft_strequ(p, "-p"))
+		else if (!strcmp(p, "-p"))
 		{
-			if (ft_isnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
+			if (strisnumber(argv[i + 1]) && atoi(argv[i + 1]) > 0)
 				opts->opt_port = atoi(argv[i++ + 1]);
 			else
 				return (infousage(ERR_INVARG));
@@ -87,7 +97,7 @@ int			parse_opts(s_opts *opts, int argc, char **argv)
 		}
 		else
 		{
-			if (ft_isnumber(argv[i]))
+			if (strisnumber(argv[i]))
 				return (infousage(ERR_INVARG));
 			opts->destination = argv[i];
 			return (0);

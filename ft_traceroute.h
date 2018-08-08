@@ -26,6 +26,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
+# include <ctype.h>
 # include <sys/select.h>
 # include <sys/types.h>
 # include <sys/socket.h>
@@ -42,65 +43,56 @@
 ** Options
 */
 
-typedef struct          t_opts
+typedef struct t_opts
 {
-    int	                opt_reuse;
-	int				    opt_ttl;
-    int	                opt_ttlst;
-	int				    opt_timeout;
-	int				    opt_probes;
-	int				    opt_port;
-	int				    opt_proto;
-    char                *destination;
-}                       s_opts;
+  int opt_reuse;
+  int opt_ttl;
+  int opt_ttlst;
+  int opt_timeout;
+  int opt_probes;
+  int opt_port;
+  int opt_proto;
+  char *destination;
+} s_opts;
 
 /*
 ** Internet checksum
 */
 
-unsigned short			checksum(unsigned short *ptr, int nbytes);
+unsigned short checksum(unsigned short *ptr, int nbytes);
 
 /*
 ** Parse CLI arguments
 */
-	
-int						parse_opts(s_opts *opts, int argc, char **argv);
 
-/*
-** Libft utils
-*/
-	
-int						ft_isnumber(char *s);
-void					*ft_memcpy(void *dst, const void *src, size_t n);
-void					*ft_memset(void *s, int c, size_t n);
-int						ft_strequ(char *s1, char *s2);
+int parse_opts(s_opts *opts, int argc, char **argv);
 
 /*
 ** Usage informations and errors
 */
-	
-int						infousage(int e);
+
+int infousage(int e);
 
 /*
 ** Host resolving
 */
-	
-char					*read_hostname(struct in_addr *iaddr, char *host);
-struct sockaddr_in		*resolve_host(char *host);
+
+char *read_hostname(struct in_addr *iaddr, char *host);
+struct sockaddr_in *resolve_host(char *host);
 
 /*
 ** Read/Send packets
 */
 
-int						read_packet(int sock, int hops, int probes, struct timeval *tv_send);
-void					send_packet(int proto, int sock, int port, struct sockaddr_in *saddr, struct timeval *tv_send);
-void 					send_packet_udp(int sock, int port, struct sockaddr_in *saddr, struct timeval *tv_send);
-void 					send_packet_icmp(int sock, struct sockaddr_in *saddr, struct timeval *tv_send);
+int read_packet(int sock, int hops, int probes, struct timeval *tv_send);
+void send_packet(int proto, int sock, int port, struct sockaddr_in *saddr, struct timeval *tv_send);
+void send_packet_udp(int sock, int port, struct sockaddr_in *saddr, struct timeval *tv_send);
+void send_packet_icmp(int sock, struct sockaddr_in *saddr, struct timeval *tv_send);
 
 /*
 ** RTT calculation
 */
 
-double					timeval_diff(struct timeval *tv_1, struct timeval *tv_2);
+double timeval_diff(struct timeval *tv_1, struct timeval *tv_2);
 
 #endif

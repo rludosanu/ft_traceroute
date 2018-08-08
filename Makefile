@@ -14,10 +14,6 @@ EXEC		=	ft_traceroute
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 SRC			=	main\
-				ft_isnumber\
-				ft_memcpy\
-				ft_memset\
-				ft_strequ\
 				checksum\
 				infousage\
 				parse_opts\

@@ -25,7 +25,7 @@ int						read_packet(int sock, int hops, int probes, struct timeval *tv_send)
 	int 				n;
 	char 				host[INET_ADDRSTRLEN + 1];
 
-	ft_memset(&buf, 0, MAX_DGRAM_SIZE);
+	memset(&buf, 0, MAX_DGRAM_SIZE);
 	if ((n = recvfrom(sock, &buf, MAX_DGRAM_SIZE, 0, (struct sockaddr *)&from, &fromlen)) > 0)
 	{
 		ptr = (char *)&buf;

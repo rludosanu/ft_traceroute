@@ -5,16 +5,7 @@ Print the route packets take to network host
 ## Synopsis
 
 ```
-./ft_traceroute
-	[-h]
-	[-f first_ttl]
-	[-m max_ttl]
-	[-w waittime]
-	[-q nqueries]
-	[-I]
-	[-U]
-	[-p port]
-	host
+sudo ./ft_traceroute [-h] [-f first_ttl] [-m max_ttl] [-w waittime] [-q nqueries] [-I] [-U] [-p port] host
 ```
 
 ## Usage

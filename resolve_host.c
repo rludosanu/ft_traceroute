@@ -36,7 +36,7 @@ struct sockaddr_in 		*resolve_host(char *host)
 	if ((ret = getaddrinfo(host, NULL, &hints, &res)) == 0)
 	{
 		if ((saddr = (struct sockaddr_in *)malloc(sizeof(struct sockaddr_in))))
-			ft_memcpy(saddr, res->ai_addr, sizeof(struct sockaddr_in));
+			memcpy(saddr, res->ai_addr, sizeof(struct sockaddr_in));
 		freeaddrinfo(res);
 	}
 

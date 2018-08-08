@@ -36,9 +36,9 @@ void 					send_packet_udp(int sock, int port, struct sockaddr_in *saddr, struct 
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);
 	sin.sin_addr.s_addr = saddr->sin_addr.s_addr;
-	ft_memset(&(sin.sin_zero), 0, sizeof(sin.sin_zero));
+	memset(&(sin.sin_zero), 0, sizeof(sin.sin_zero));
 
-	ft_memset(&packet, 0, 60);
+	memset(&packet, 0, 60);
 	gettimeofday(tv_send, NULL);
 
 	sendto(sock, packet, 60, 0, (struct sockaddr *)&sin, sizeof(sin));
@@ -57,13 +57,13 @@ void 					send_packet_icmp(int sock, struct sockaddr_in *saddr, struct timeval *
 
 	sin.sin_family = AF_INET;
 	sin.sin_addr.s_addr = saddr->sin_addr.s_addr;
-	ft_memset(&(sin.sin_zero), 0, sizeof(sin.sin_zero));
+	memset(&(sin.sin_zero), 0, sizeof(sin.sin_zero));
 
 	packet_size = sizeof(struct icmp);
 	if (!(packet = (char *)malloc(packet_size)))
 		return ;
 
-	ft_memset(packet, 0, packet_size);
+	memset(packet, 0, packet_size);
 	gettimeofday(tv_send, NULL);
 
 	icmp = (struct icmp *)packet;

@@ -14,7 +14,7 @@
 
 char	*read_hostname(struct in_addr *iaddr, char *host)
 {
-	ft_memset(host, 0, INET_ADDRSTRLEN + 1);
+	memset(host, 0, INET_ADDRSTRLEN + 1);
 	if (inet_ntop(AF_INET, &(iaddr->s_addr), host, INET_ADDRSTRLEN + 1))
 		return (host);
 	return (NULL);

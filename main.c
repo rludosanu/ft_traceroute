@@ -12,19 +12,19 @@
 
 #include "ft_traceroute.h"
 
-int						main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int					sock_udp;
-	int					sock_icmp;
-	s_opts				opts;
-	int					n_probes;
-	char				host[INET_ADDRSTRLEN + 1];
-	struct sockaddr_in	*saddr;
-	struct timeval		tv_send;
-	struct timeval		tv_select;
-	fd_set				readfs;
-	int					ret;
-	int 				retpkt;
+	int sock_udp;
+	int sock_icmp;
+	s_opts opts;
+	int n_probes;
+	char host[INET_ADDRSTRLEN + 1];
+	struct sockaddr_in *saddr;
+	struct timeval tv_send;
+	struct timeval tv_select;
+	fd_set readfs;
+	int ret;
+	int retpkt;
 
 	// Init sockets
 	sock_udp = -1;
@@ -76,7 +76,7 @@ int						main(int argc, char **argv)
 		{
 			// Send one probe
 			send_packet(opts.opt_proto, (opts.opt_proto == IPPROTO_UDP) ? sock_udp : sock_icmp, opts.opt_port, saddr, &tv_send);
-			
+
 			// Timeout for incoming packets
 			tv_select.tv_sec = (long)opts.opt_timeout;
 			tv_select.tv_usec = 0;
